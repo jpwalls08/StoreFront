@@ -12,6 +12,7 @@ namespace StoreFront.UI.MVC.Models
         public int? StoreId { get; set; }
         public int? EquipmentTypeId { get; set; }
         public int? StatusId { get; set; }
+        public string? ProductImage { get; set; }
 
         public virtual EquipmentType? EquipmentType { get; set; }
         public virtual EquipmentStatus? Status { get; set; }
