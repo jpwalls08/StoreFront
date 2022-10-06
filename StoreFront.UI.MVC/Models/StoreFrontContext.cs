@@ -143,6 +143,10 @@ namespace StoreFront.UI.MVC.Models
 
                 entity.Property(e => e.EquipmentTypeId).HasColumnName("EquipmentTypeID");
 
+                entity.Property(e => e.ProductImage)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.StatusId).HasColumnName("StatusID");
 
                 entity.Property(e => e.StoreId).HasColumnName("StoreID");
