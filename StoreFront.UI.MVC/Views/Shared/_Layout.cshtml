@@ -35,7 +35,6 @@
 <body>
 
 
-
     <!-- Start Header Area -->
     <header class="header_area sticky-header">
         <div class="main_menu">
@@ -52,37 +51,46 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="~/">Home</a></li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Shop</a>
                                 <ul class="dropdown-menu">
-                                    <li><a asp-action="ShopCategory" asp-controller="Shop">Shop Category</a></li>
-                                    <li><a asp-action="ProductDetails" asp-controller="Shop">Product Details</a></li>
+                                    <li><a asp-action="Index" asp-controller="EquipmentTypes">Shop Equipment</a></li>
+                                    <li><a asp-action="Details" asp-controller="Equipments">Product Details</a></li>
                                     <li><a asp-action="Checkout" asp-controller="Shop">Checkout</a></li>
-                                    <li><a asp-action="ShoppingCart" asp-controller="Shop">Shopping Cart</a></li>
-                                    <li><a asp-action="Confirmation" asp-controller="Shop">Confirmation</a></li>
+                                    @*<li><a asp-action="ShoppingCart" asp-controller="Shop">Shopping Cart</a></li>
+                                    <li><a asp-action="Confirmation" asp-controller="Shop">Confirmation</a></li>*@
                                 </ul>
                             </li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+
+
+                           
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Admin</a>
-                                <ul class="dropdown-menu">
-                                    <li><a asp-action="ListUsers" asp-controller="Administration">Users</a></li>
-                                    <li><a asp-action="ListRoles" asp-controller="Administration">Roles</a></li>
-                                    <li><a asp-action="Index" asp-controller="GolfStores">Suppliers</a></li>
-                                    <li><a asp-action="Index" asp-controller="EquipmentTypes">Categories</a></li>
-                                </ul>
-                            </li>
+                                    <ul class="dropdown-menu">
+                                        <li><a asp-action="ListUsers" asp-controller="Administration">Users</a></li>
+                                        <li><a asp-action="ListRoles" asp-controller="Administration">Roles</a></li>
+                                        <li><a asp-action="Index" asp-controller="GolfStores">Suppliers</a></li>
+                                        <li><a asp-action="Index" asp-controller="EquipmentTypes">Categories</a></li>
+                                    </ul>
+                                </li>
+
+                            
+
+
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Login</a>
                                 <ul class="dropdown-menu">
-                                    <li><a asp-action="Account" asp-controller="Login">Account</a></li>
-                                    <li><a asp-action="Register" asp-controller="Login">Register</a></li>
+                                    <partial name="_LoginPartial" />
                                 </ul>
                             </li>
+
                         </ul>
+
+
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
                             <li class="nav-item">
@@ -142,9 +150,9 @@
                                         <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
                                     </div>
 
-                                     <div class="col-lg-4 col-md-4">
-                                                <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-                                            </div>  
+                                    <div class="col-lg-4 col-md-4">
+                                        <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+                                    </div>
                                 </div>
                                 <div class="info"></div>
                             </form>
