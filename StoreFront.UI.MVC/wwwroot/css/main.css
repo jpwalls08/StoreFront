@@ -7,6 +7,15 @@
 /* Wide Mobile Layout: 480px */
 /* Section Gaps css
 ============================================================================================ */
+.navbar img{
+    max-height: 70px;
+}
+
+/*.header_area{
+    position: static !important;
+    margin-bottom: 70px;
+}*/
+
 .no-padding {
   padding: 0; }
 
@@ -992,7 +1001,7 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 100%; }
 
 .sticky-wrapper {
-  position: absolute;
+  position: static;
   top: 40px;
   width: 100%; }
   @media (max-width: 991px) {
@@ -1000,16 +1009,17 @@ h1, h2, h3, h4, h5, h6 {
       top: 0; } }
 
 .header_area {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  transition: background 0.4s, all 0.3s linear;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s; }
+    position: static;
+    margin-bottom: 70px;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    transition: background 0.4s, all 0.3s linear;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
   .header_area .main_menu .main_box {
     background: #fff;
     margin: 0px auto 0;

@@ -9,6 +9,34 @@
 
   <ItemGroup>
     <Content Remove="Views\Shared\_OriginalLayout.cshtml" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Adidas Women's Warp Knit Golf Skirt.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Barstool Sports Fore Play Stand Bag.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\CobraLTD ONEIrons.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\FootJoy WeatherSof Golf Glove - 2 Pack.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Garmin Approach S42 Golf GPS Watch Black.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Garmin Approach S42 Golf GPS Watch White.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Nike Men's Dri-FIT UV Chino 9in Golf Shorts Back.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Titleist 2021 Players 4 Stand Bag Black.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Titleist 2021 Players 4 Stand Bag White.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat Grey.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat White-Navy Back .webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat White-Navy.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\titleisttsrdriver.webp" />
+    <Content Remove="wwwroot\img\storefrontphotos\equipment\TravisMathew Men's The Zinna Golf Polo.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Adidas Women's Warp Knit Golf Skirt.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Barstool Sports Fore Play Stand Bag.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\CobraLTD ONEIrons.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\FootJoy WeatherSof Golf Glove - 2 Pack.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Garmin Approach S42 Golf GPS Watch Black.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Garmin Approach S42 Golf GPS Watch White.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Nike Men's Dri-FIT UV Chino 9in Golf Shorts Back.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist 2021 Players 4 Stand Bag Black.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist 2021 Players 4 Stand Bag White.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat Grey.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat White-Navy Back .webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat White-Navy.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\titleisttsrdriver.webp" />
+    <Content Remove="wwwroot\_Archive\img\storefrontphotos\equipment\TravisMathew Men's The Zinna Golf Polo.webp" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +60,20 @@
     <None Include="wwwroot\fonts\themify.svg" />
     <None Include="wwwroot\img\.DS_Store" />
     <None Include="wwwroot\img\organic-food\.DS_Store" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Adidas Women's Warp Knit Golf Skirt.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Barstool Sports Fore Play Stand Bag.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\CobraLTD ONEIrons.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\FootJoy WeatherSof Golf Glove - 2 Pack.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Garmin Approach S42 Golf GPS Watch Black.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Garmin Approach S42 Golf GPS Watch White.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Nike Men's Dri-FIT UV Chino 9in Golf Shorts Back.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Titleist 2021 Players 4 Stand Bag Black.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Titleist 2021 Players 4 Stand Bag White.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat Grey.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat White-Navy Back .webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat White-Navy.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\titleisttsrdriver.webp" />
+    <None Include="wwwroot\img\storefrontphotos\equipment\TravisMathew Men's The Zinna Golf Polo.webp" />
     <None Include="wwwroot\js\.DS_Store" />
     <None Include="wwwroot\js\countdown.js" />
     <None Include="wwwroot\js\gmaps.min.js" />
@@ -47,6 +89,20 @@
     <None Include="wwwroot\js\vendor\bootstrap.min.js" />
     <None Include="wwwroot\js\vendor\jquery-2.2.4.min.js" />
     <None Include="wwwroot\js\vendor\popper.js" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Adidas Women's Warp Knit Golf Skirt.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Barstool Sports Fore Play Stand Bag.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\CobraLTD ONEIrons.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\FootJoy WeatherSof Golf Glove - 2 Pack.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Garmin Approach S42 Golf GPS Watch Black.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Garmin Approach S42 Golf GPS Watch White.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Nike Men's Dri-FIT UV Chino 9in Golf Shorts Back.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist 2021 Players 4 Stand Bag Black.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist 2021 Players 4 Stand Bag White.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat Grey.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat White-Navy Back .webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\Titleist Men's 2022 Tour Performance Golf Hat White-Navy.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\titleisttsrdriver.webp" />
+    <None Include="wwwroot\_Archive\img\storefrontphotos\equipment\TravisMathew Men's The Zinna Golf Polo.webp" />
   </ItemGroup>
 
   <ItemGroup>
