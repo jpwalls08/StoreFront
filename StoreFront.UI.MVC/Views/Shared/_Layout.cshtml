@@ -65,7 +65,7 @@
 
                                     <ul class="dropdown-menu">
                                         <li><a asp-action="Index" asp-controller="EquipmentTypes">Shop Equipment</a></li>
-                                        <li><a asp-action="Details" asp-controller="Equipments">Product Details</a></li>
+                                        <li><a asp-action="Index" asp-controller="Equipments">Product Details</a></li>
                                         <li><a asp-action="Checkout" asp-controller="Shop">Checkout</a></li>
                                         @*<li><a asp-action="ShoppingCart" asp-controller="Shop">Shopping Cart</a></li>
                                     <li><a asp-action="Confirmation" asp-controller="Shop">Confirmation</a></li>*@
@@ -122,11 +122,11 @@
                     <span class="lnr lnr-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
-
+        </div>
     </header>
     <!-- End Header Area -->
     @RenderSection("Banner", required: false)
-    </div>
+
 
     @RenderBody()
 
