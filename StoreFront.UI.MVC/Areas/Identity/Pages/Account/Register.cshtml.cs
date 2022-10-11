@@ -17,7 +17,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using StoreFront.DATA.EF.Models;
 
 namespace StoreFront.UI.MVC.Areas.Identity.Pages.Account
 {
@@ -97,6 +99,35 @@ namespace StoreFront.UI.MVC.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            //Extended Identity
+            //Added the properties below se we can bind this information to the Register model and the create our UserDetail object with that info 
+            [Required]
+            [StringLength(50, ErrorMessage = "Cannot exceed 50 characters")]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "Cannot exceed 50 characters")]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
+            [StringLength(150, ErrorMessage = "Cannot exceed 150 characters")]
+            public string? Address { get; set; }
+
+            [StringLength(50, ErrorMessage = "Cannot exceed 50 characters")]
+            public string? City { get; set; }
+
+            [StringLength(2, ErrorMessage = "Cannot exceed 2 characters")]
+            public string? State { get; set; }
+
+            [StringLength(5, ErrorMessage = "Cannot exceed 5 characters")]
+            [DataType(DataType.PostalCode)]
+            public string? Zip { get; set; }
+
+            [StringLength(24, ErrorMessage = "Cannot exceed 24 characters")]
+            [DataType(DataType.PhoneNumber)]
+            public string? Phone { get; set; }
         }
 
 
@@ -123,6 +154,29 @@ namespace StoreFront.UI.MVC.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+
+                    StoreFrontContext _context = new StoreFrontContext();
+
+
+                    UserDetail userDetail = new UserDetail()
+                    {
+                        //object initialization syntax - creating an object and assigning values without params
+                        UserId = userId,
+                        FirstName = Input.FirstName,
+                        LastName = Input.LastName,
+                        Address = Input.Address,
+                        City = Input.City,
+                        State = Input.State,
+                        Zip = Input.Zip,
+                        Phone = Input.Phone
+
+                    };
+
+                    //Queuing the record up to be saved to the DB
+                    _context.UserDetails.Add(userDetail);
+                    //Save the record to the DB
+                    _context.SaveChanges();
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
