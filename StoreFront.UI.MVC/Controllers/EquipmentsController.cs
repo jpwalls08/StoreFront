@@ -15,12 +15,16 @@ namespace StoreFront.UI.MVC.Controllers
     {
         private readonly StoreFrontContext _context;
 
-        public EquipmentsController(StoreFrontContext context)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public EquipmentsController(StoreFrontContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Equipments
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var storeFrontContext = _context.Equipment.Include(e => e.EquipmentType).Include(e => e.Status).Include(e => e.Store);

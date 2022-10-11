@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+
+
+<!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
 <head>
@@ -41,7 +45,7 @@
             <nav class="navbar navbar-expand-lg navbar-light main_box">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="~/"><img src="~/img/logo.png" alt="#"></a>
+                    <a class="navbar navbar-brand" href="~/"><img src="~/img/storefrontphotos/logo/capture.JPG" alt="#"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
@@ -55,17 +59,23 @@
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Shop</a>
-                                <ul class="dropdown-menu">
-                                    <li><a asp-action="Index" asp-controller="EquipmentTypes">Shop Equipment</a></li>
-                                    <li><a asp-action="Details" asp-controller="Equipments">Product Details</a></li>
-                                    <li><a asp-action="Checkout" asp-controller="Shop">Checkout</a></li>
-                                    @*<li><a asp-action="ShoppingCart" asp-controller="Shop">Shopping Cart</a></li>
+
+                                @if (signInManager.IsSignedIn(User))
+                                {
+
+                                    <ul class="dropdown-menu">
+                                        <li><a asp-action="Index" asp-controller="EquipmentTypes">Shop Equipment</a></li>
+                                        <li><a asp-action="Details" asp-controller="Equipments">Product Details</a></li>
+                                        <li><a asp-action="Checkout" asp-controller="Shop">Checkout</a></li>
+                                        @*<li><a asp-action="ShoppingCart" asp-controller="Shop">Shopping Cart</a></li>
                                     <li><a asp-action="Confirmation" asp-controller="Shop">Confirmation</a></li>*@
-                                </ul>
+                                    </ul>
+
+                                }
                             </li>
 
-
-                           
+                            @if (User.IsInRole("Admin"))
+                            {
                                 <li class="nav-item submenu dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Admin</a>
@@ -77,7 +87,10 @@
                                     </ul>
                                 </li>
 
-                            
+                            }
+
+
+
 
 
                             <li class="nav-item submenu dropdown">
@@ -106,7 +119,7 @@
                 <form class="d-flex justify-content-between">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
                     <button type="submit" class="btn"></button>
-                    <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+                    <span class="lnr lnr-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
 
@@ -125,8 +138,7 @@
                     <div class="single-footer-widget">
                         <h6>About Us</h6>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-                            magna aliqua.
+                            Here at GolfLinqs, we pride ourself in our one-to-one customer service and staff expertise.
                         </p>
                     </div>
                 </div>

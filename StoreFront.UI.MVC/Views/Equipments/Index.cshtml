@@ -4,7 +4,31 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>*@
+<section class="product_section layout_padding gray-section pb-4 pt-4">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Shop <span>Equipment</span>
+            </h2>
+            <p align="center">
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Create">Add New Product</a>
+                }
+
+                <a asp-action="TiledProducts">Tile View</a>
+
+                @*
+                This view is created in our ProductsController so it assumes it will use the same controller because the Action is in the EquipmentController. Only                 need to add controller if you want to switch your controller if you're using a different View
+                *@
+
+
+            </p>
+        </div>
+    </div>
+</section>
 
 <p>
     <a asp-action="Create">Add Product</a>
