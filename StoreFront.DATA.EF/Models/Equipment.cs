@@ -1,10 +1,16 @@
-﻿using System;
+﻿using StoreFront.DATA.EF.Models;
+using System;
 using System.Collections.Generic;
 
 namespace StoreFront.DATA.EF.Models
 {
     public partial class Equipment
     {
+        public Equipment()
+        {
+            OrderEquipments = new HashSet<OrderEquipment>();
+        }
+
         public int EquipmentId { get; set; }
         public string EquipmentName { get; set; } = null!;
         public decimal EquipmentPrice { get; set; }
@@ -17,5 +23,6 @@ namespace StoreFront.DATA.EF.Models
         public virtual EquipmentType? EquipmentType { get; set; }
         public virtual EquipmentStatus? Status { get; set; }
         public virtual GolfStore? Store { get; set; }
+        public virtual ICollection<OrderEquipment> OrderEquipments { get; set; }
     }
 }
