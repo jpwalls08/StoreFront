@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StoreFront.DATA.EF.Models;
+using StoreFront.UI.MVC.Utilities;
 
 namespace StoreFront.UI.MVC.Controllers
 {
@@ -77,6 +79,45 @@ namespace StoreFront.UI.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (equipment.Image !=null)
+                {
+                    string ext = Path.GetExtension(equipment.Image.FileName);
+
+                    string[] validExts = { ".jpeg", ".jpg", ".gif", ".png" };
+
+                    if (validExts.Contains(ext.ToLower()) && equipment.Image.Length < 4_194_303)
+                    {
+                        equipment.ProductImage = Guid.NewGuid() + ext;
+
+                        string iAmRoot = _webHostEnvironment.WebRootPath;
+
+                        string fullImage = iAmRoot + "/images";
+
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await equipment.Image.CopyToAsync(memoryStream);
+
+                            using (var img = Image.FromStream(memoryStream))
+                            {
+                                int maxImageSize = 500; //size in pixels
+                                int maxThumbSize = 100; //size in pixels
+
+                                ImageUtility.ResizeImage(iAmRoot, equipment.ProductImage, img, maxImageSize, maxThumbSize);
+
+                                //myFile.Save("path/to/folder", "filename") > How to save something 
+                                //that is NOT an image.
+
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    equipment.ProductImage = "noimage.png";
+                }
+              
+
                 _context.Add(equipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

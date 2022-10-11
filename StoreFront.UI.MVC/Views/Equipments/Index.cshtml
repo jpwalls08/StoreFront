@@ -87,6 +87,12 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> |
+
+                @if (item.Eq)
+                    {
+                        
+                    }
+
                 <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
             </td>
         </tr>
