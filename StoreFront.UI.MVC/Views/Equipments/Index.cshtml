@@ -61,41 +61,46 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentType.TypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status.StatusName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Store.PhoneNumber)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> |
-
-                @if (item.Eq)
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductImage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentType.TypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.StatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Store.PhoneNumber)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> |
+                    @*@if (item.OrderProducts.Count() == 0)
+                {*@
+                        <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
+                    @*}
+                    else
                     {
-                        
-                    }
+                        <a disabled="true" class="text-danger" style="text-decoration: line-through;"
+                        title="Can't delete - referenced by other records">Delete</a>
+                    }*@
 
-                <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        
+                    </td>
+                </tr>
+                    }
+        </tbody>
+    </table>
