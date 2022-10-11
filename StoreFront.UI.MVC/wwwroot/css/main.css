@@ -11,13 +11,21 @@
     max-height: 70px;
 }
 
+#search_input_box {
+    position: absolute !important;
+}
+
+.footer-area{
+    position:sticky !important;
+}
+
 /*.header_area{
     position: static !important;
     margin-bottom: 70px;
 }*/
 
 .no-padding {
-  padding: 0; }
+  padding: 70px; }
 
 .section_gap {
   padding: 100px 0; }

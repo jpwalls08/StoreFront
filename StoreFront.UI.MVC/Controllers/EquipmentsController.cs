@@ -30,6 +30,13 @@ namespace StoreFront.UI.MVC.Controllers
             var storeFrontContext = _context.Equipment.Include(e => e.EquipmentType).Include(e => e.Status).Include(e => e.Store);
             return View(await storeFrontContext.ToListAsync());
         }
+        
+        public async Task<IActionResult> TiledView()
+        {
+            var storeFrontContext = _context.Equipment.Include(e => e.EquipmentType).Include(e => e.Status).Include(e => e.Store);
+            return View(await storeFrontContext.ToListAsync());
+        }
+
 
         // GET: Equipments/Details/5
         public async Task<IActionResult> Details(int? id)
