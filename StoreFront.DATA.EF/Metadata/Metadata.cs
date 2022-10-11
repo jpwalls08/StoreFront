@@ -54,6 +54,7 @@ namespace StoreFront.DATA.EF.Models//.Metadata
     {
         public int StatusId { get; set; } //PK
 
+
         [Required(ErrorMessage = "Status is required")]
         [Display(Name = "Status")]
         public string StatusName { get; set; }
@@ -69,27 +70,34 @@ namespace StoreFront.DATA.EF.Models//.Metadata
         [Display(Name = "Store")]
         public string StoreName { get; set; } = null!;
 
-        [Required(ErrorMessage = "Phone Number is required")]
+
+        //[Required(ErrorMessage = "Phone Number is required")]
         [StringLength(50, ErrorMessage = "Cannot exceed 50 characters")]
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; } = null!;
+        public string? PhoneNumber { get; set; } = null!;
+
 
         [StringLength(20, ErrorMessage = "Cannot exceed 20 characters")]
         public string? Region { get; set; }
 
+
         [StringLength(50, ErrorMessage = "Cannot exceed 50 characters")]
         public string? Country { get; set; }
+
 
         [StringLength(10, ErrorMessage = "Cannot exceed 10 characters")]
         [DataType(DataType.PostalCode)]
         public string? ZipCode { get; set; }
 
+
         [StringLength(10, ErrorMessage = "Cannot exceed 10 characters")]
         public string? State { get; set; }
 
+
         [StringLength(50, ErrorMessage = "Cannot exceed 50 characters")]
         public string? Address { get; set; }
+
     }
 
 }

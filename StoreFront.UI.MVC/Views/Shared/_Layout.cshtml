@@ -60,16 +60,18 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Shop</a>
 
-                                
+                                @if (signInManager.IsSignedIn(User))
+                                {
 
                                     <ul class="dropdown-menu">
                                         <li><a asp-action="Index" asp-controller="EquipmentTypes">Shop Equipment</a></li>
-                                        <li><a asp-action="Index" asp-controller="Equipments">Product Details</a></li>
+                                        <li><a asp-action="Details" asp-controller="Equipments">Product Details</a></li>
                                         <li><a asp-action="Checkout" asp-controller="Shop">Checkout</a></li>
                                         @*<li><a asp-action="ShoppingCart" asp-controller="Shop">Shopping Cart</a></li>
                                     <li><a asp-action="Confirmation" asp-controller="Shop">Confirmation</a></li>*@
                                     </ul>
-                                
+
+                                }
                             </li>
 
                             @if (User.IsInRole("Admin"))
