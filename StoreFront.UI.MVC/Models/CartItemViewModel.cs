@@ -17,5 +17,3 @@ namespace StoreFront.UI.MVC.Models
 }
 
 
-//CartItemViewModel civm = new CartItemViewModel();
-//civm.CartProd

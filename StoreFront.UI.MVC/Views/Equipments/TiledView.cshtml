@@ -1,84 +1,132 @@
 ﻿@model IEnumerable<StoreFront.DATA.EF.Models.Equipment>
 
 @{
-    ViewData["Title"] = "TiledView";
+    ViewData["Title"] = "Tiled Equipment";
 }
 
-<h1>TiledView</h1>
+<h1>@ViewData["Title"]</h1>
 
 <section class="banner-area organic-breadcrumb">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
-                <h1>Contact Us</h1>
-                <nav class="d-flex align-items-center">
-                    <a href="index.html">Shop Equipment<span class="lnr lnr-arrow-right"></span></a>
-                </nav>
+                <h1>
+                    Shop <span>Golf Equipment</span>
+                </h1>
+
+                <p>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <span>
+                            <a asp-action="Create">Create New</a> |
+                            <a asp-action="Discontinued">Discontinued Products</a>
+                        </span>
+
+
+                    }
+
+                    <a asp-action="Index">Tile View</a>
+
+                </p>
+            </div>
+
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="box">
+                            <div class="option_container">
+                                <div class="options">
+                                    <a asp-action="Details" asp-route-id="@item.EquipmentId" class="option1">
+                                        @item.EquipmentName
+                                    </a>
+                                    <a href="javascript:void(0)" class="option2">
+                                        Add to cart
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="img-box">
+                                <img src="~/img/storefrontphotos/equipment/t_@item.ProductImage" alt="@item.EquipmentPrice" longdesc="@item.EquipmentDescription" />
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    @item.EquipmentName
+                                </h5>
+                                <h6>
+                                    @Html.DisplayFor(modelItem => item.EquipmentPrice)
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+
+                }
             </div>
         </div>
     </div>
 </section>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EquipmentName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EquipmentPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EquipmentDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EquipmentType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Store)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentType.TypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status.StatusName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Store.PhoneNumber)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+
+@*   <table class="table">
+        <thead>
+            <tr>
+                <th>
+                                @Html.DisplayNameFor(model => model.EquipmentName)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.EquipmentPrice)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.EquipmentDescription)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.ProductImage)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.EquipmentType)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.Store)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+                        @foreach (var item in Model)
+                        {
+                <tr>
+                    <td>
+                                    @Html.DisplayFor(modelItem => item.EquipmentName)
+                    </td>
+                    <td>
+                                    @Html.DisplayFor(modelItem => item.EquipmentPrice)
+                    </td>
+                    <td>
+                                    @Html.DisplayFor(modelItem => item.EquipmentDescription)
+                    </td>
+                    <td>
+                                    @Html.DisplayFor(modelItem => item.ProductImage)
+                    </td>
+                    <td>
+                                    @Html.DisplayFor(modelItem => item.EquipmentType.TypeName)
+                    </td>
+                    <td>
+                                    @Html.DisplayFor(modelItem => item.Status.StatusName)
+                    </td>
+                    <td>
+                                    @Html.DisplayFor(modelItem => item.Store.PhoneNumber)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
+                    </td>
+                </tr>
+                        }
+        </tbody>
+    </table>*@

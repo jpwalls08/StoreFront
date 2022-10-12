@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using StoreFront.DATA.EF.Models;
 
 namespace StoreFront.DATA.EF.Models
 {
@@ -27,6 +26,8 @@ namespace StoreFront.DATA.EF.Models
         public virtual DbSet<EquipmentStatus> EquipmentStatuses { get; set; } = null!;
         public virtual DbSet<EquipmentType> EquipmentTypes { get; set; } = null!;
         public virtual DbSet<GolfStore> GolfStores { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<OrderEquipment> OrderEquipments { get; set; } = null!;
         public virtual DbSet<UserDetail> UserDetails { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -222,6 +223,58 @@ namespace StoreFront.DATA.EF.Models
                     .HasMaxLength(10)
                     .IsUnicode(false)
                     .IsFixedLength();
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ShipCity)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShipState)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.ShipToName)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShipZip)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(128)
+                    .HasColumnName("UserID");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Orders_UserDetails");
+            });
+
+            modelBuilder.Entity<OrderEquipment>(entity =>
+            {
+                entity.Property(e => e.OrderEquipmentId).HasColumnName("OrderEquipmentID");
+
+                entity.Property(e => e.EquipmentId).HasColumnName("EquipmentID");
+
+                entity.Property(e => e.EquipmentPrice).HasColumnType("money");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.HasOne(d => d.Equipment)
+                    .WithMany(p => p.OrderEquipments)
+                    .HasForeignKey(d => d.EquipmentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderEquipments_Equipment");
             });
 
             modelBuilder.Entity<UserDetail>(entity =>

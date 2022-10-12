@@ -1,0 +1,95 @@
+﻿@model Dictionary<int, CartItemViewModel>
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<section class="product_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Your <span>Cart</span>
+            </h2>
+
+            <p align="center">
+                <a asp-action="Index" asp-controller="Equipment" class="btn btn-info">
+                    Back to Shopping
+                </a>
+            </p>
+
+        </div>
+
+        @if (Model.Count == 0)
+        {
+            @*Nothing in the cart*@
+            <p class="alert alert-warning text-center">
+                @ViewBag.Message
+            </p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/images/t_@item.Value.CartProd.ProductImage" alt="@item.Value.CartProd.EquipmentName" />
+                            </td>
+                            <td>
+                                @*@item.Value.Qty*@
+                                <form asp-action="UpdateCart">
+                                    <input type="hidden" name="equipmentId" value="@item.Value.CartProd.EquipmentId" />
+                                    @*<input type="number" min="1" max="@item.Value.CartProd.UnitsInStock" name="qty" value="@item.Value.Qty" class="form-control d-block mx-auto w-50 text-center" />*@
+                                    <input type="submit" value="Update Cart" class="btn btn-primary btn-sm" />
+                                </form>
+                            </td>
+                            <td>
+                                @item.Value.CartProd.EquipmentName
+                            </td>
+                            <td>
+                                @*
+                        Using the DisplayFor() helper method so we can see some currency
+                        formatting
+                        *@
+                                @Html.DisplayFor(modelItem => item.Value.CartProd.EquipmentPrice)
+
+                                @*@item.Value.CartProd.ProductPrice*@
+                            </td>
+                            <td>
+                                @*[Total goes here]*@
+                                @{
+                                    //Calculate the line total and display for each cart item
+                                    decimal? lineTotal = item.Value.Qty * item.Value.CartProd.EquipmentPrice;
+                                }
+
+                                @string.Format($"{lineTotal:c}")
+
+                            </td>
+                            <td>
+                                @*[Remove from cart button]*@
+                                <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.Value.CartProd.EquipmentId" class="btn btn-danger">
+                                    Remove From Cart
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        }
+
+
+    </div>
+</section>
