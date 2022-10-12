@@ -18,7 +18,7 @@
                     <a asp-action="Create">Add New Product</a>
                 }
 
-                <a asp-action="TiledProducts">Tile View</a>
+                <a asp-action="TiledEquipments">Tile View</a>
 
                 @*
                 This view is created in our ProductsController so it assumes it will use the same controller because the Action is in the EquipmentController. Only                 need to add controller if you want to switch your controller if you're using a different View
@@ -88,19 +88,9 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> |
-                    @*@if (item.OrderProducts.Count() == 0)
-                {*@
-                        <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
-                    @*}
-                    else
-                    {
-                        <a disabled="true" class="text-danger" style="text-decoration: line-through;"
-                        title="Can't delete - referenced by other records">Delete</a>
-                    }*@
-
-                        
-                    </td>
-                </tr>
-                    }
-        </tbody>
-    </table>
+                    <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
