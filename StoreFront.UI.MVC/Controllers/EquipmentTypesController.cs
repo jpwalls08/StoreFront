@@ -20,12 +20,14 @@ namespace StoreFront.UI.MVC.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: EquipmentTypes
         public async Task<IActionResult> Index()
         {
               return View(await _context.EquipmentTypes.ToListAsync());
         }
 
+        [AllowAnonymous]
         // GET: EquipmentTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {

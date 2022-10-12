@@ -17,7 +17,12 @@
                 <p>
                     @if (User.IsInRole("Admin"))
                     {
-                        <a asp-action="Create">Create New</a>
+                        <span>
+                            <a asp-action="Create">Create New</a> |
+                            <a asp-action="Discontinued">Discontinued Products</a>
+                        </span>
+
+
                     }
 
                     <a asp-action="Index">Tile View</a>
@@ -42,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="img-box">
-                                <img src="~/img/storefrontphotos/t_@item.ProductImage" alt="@item.EquipmentPrice" longdesc="@item.EquipmentDescription" />
+                                <img src="~/img/storefrontphotos/equipment/t_@item.ProductImage" alt="@item.EquipmentPrice" longdesc="@item.EquipmentDescription" />
                             </div>
                             <div class="detail-box">
                                 <h5>
