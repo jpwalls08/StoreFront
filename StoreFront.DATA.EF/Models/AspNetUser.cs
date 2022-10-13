@@ -1,5 +1,4 @@
-﻿using StoreFront.DATA.EF.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace StoreFront.DATA.EF.Models

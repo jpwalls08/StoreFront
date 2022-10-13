@@ -65,7 +65,9 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EquipmentName)
+                    <a asp-action="Details" asp-route-id="@item.EquipmentId">
+                        @Html.DisplayFor(modelItem => item.EquipmentName)
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EquipmentPrice)
@@ -75,20 +77,35 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ProductImage)
+                    <img src="~/img/storefrontphotos/t_@item.ProductImage" class="img-fluid" alt="@item.EquipmentDescription" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EquipmentType.TypeName)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Status.StatusName)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Store.PhoneNumber)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> <span>|</span>
+                        @*<a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a>|*@
+
+                        @if (item.OrderEquipments.Count() == 0)
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a >
+
+                        }
+                        else
+                        {
+                            <a disabled="true" class="text-danger" style="text-decoration: line-through;" title="Can't delete - referenced by other records">
+                                Delete
+                            </a>
+                        }
+                    }
                 </td>
             </tr>
         }
