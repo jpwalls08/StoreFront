@@ -35,7 +35,7 @@ namespace StoreFront.DATA.EF.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\sqlexpress;database=StoreFront;trusted_connection=true;multipleactiveresultsets=true;");
+                optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=StoreFront;Trusted_Connection=true;MultipleActiveResultSets=true;");
             }
         }
 
@@ -275,6 +275,12 @@ namespace StoreFront.DATA.EF.Models
                     .HasForeignKey(d => d.EquipmentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderEquipments_Equipment");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.OrderEquipments)
+                    .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderEquipments_Orders");
             });
 
             modelBuilder.Entity<UserDetail>(entity =>

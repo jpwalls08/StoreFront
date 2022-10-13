@@ -31,4 +31,7 @@ namespace StoreFront.DATA.EF.Models//.Metadata
 
     [ModelMetadataType(typeof(GolfStoresMetadata))]
     public partial class GolfStores { }
+
+    [ModelMetadataType(typeof(OrderMetadata))]
+    public partial class Order { }
 }

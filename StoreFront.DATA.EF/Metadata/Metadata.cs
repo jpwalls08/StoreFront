@@ -48,6 +48,11 @@ namespace StoreFront.DATA.EF.Models//.Metadata
         [Display(Name = "Image")]
         public string? ProductImage { get; set; }
 
+
+        public int? UnitsInStock { get; set; }
+
+        public int? UnitsOnOrder { get; set; }
+
     }
 
     public class EquipmentStatusMetadata
@@ -99,5 +104,52 @@ namespace StoreFront.DATA.EF.Models//.Metadata
         public string? Address { get; set; }
 
     }
+
+    public class OrderMetadata
+    {
+        public int OrderId { get; set; } //PK
+
+        [StringLength(128, ErrorMessage = "Cannot exceed 128 characters")]
+        public string UserId { get; set; } = null!;
+
+        [Required(ErrorMessage = "*Order Date is required")]
+        [Display(Name = "Order Date")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)] //{0:d} = MM/dd/yyyy
+        public DateTime OrderDate { get; set; }
+
+        [Required(ErrorMessage = "*Shipped To is required")]
+        [Display(Name = "Shipped To")]
+        [StringLength(100, ErrorMessage = "Cannot exceed 100 characters")]
+        public string ShipToName { get; set; } = null!;
+
+        [Required(ErrorMessage = "*City is required")]
+        [Display(Name = "City")]
+        [StringLength(50, ErrorMessage = "Cannot exceed 50 characters")]
+        public string ShipCity { get; set; } = null!;
+
+        [Display(Name = "State")]
+        [StringLength(2, ErrorMessage = "Cannot exceed 2 characters")]
+        public string? ShipState { get; set; }
+
+        [Required(ErrorMessage = "*Zip is required")]
+        [Display(Name = "Shipped To")]
+        [StringLength(5, ErrorMessage = "Cannot exceed 5 characters")]
+        [DataType(DataType.PostalCode)]
+        public string ShipZip { get; set; } = null!;
+    }
+
+    //public class OrderEquipmentMetadata
+    //{
+    //    public int OrderEquipmentId { get; set; }//PK
+
+    //    [Required(ErrorMessage = "*ID is required")]
+    //    [Display(Name = "ID")]
+    //    public int EquipmentId { get; set; }
+
+    //    [Required(ErrorMessage = "*Order")]
+    //    public int OrderId { get; set; }
+    //    public short? Quantity { get; set; }
+    //    public decimal? EquipmentPrice { get; set; }
+    //}
 
 }
