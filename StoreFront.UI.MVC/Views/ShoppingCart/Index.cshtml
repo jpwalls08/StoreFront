@@ -88,6 +88,31 @@
                 </tbody>
 
             </table>
+
+            <div class="alert alert-success text-center">
+                <p>
+                    Your total befoe taxes and shipping is [Cart Total].
+                </p>
+
+                @if (User.Identity.IsAuthenticated)@*Check to see if a user is logged in*@
+                {
+                    <p>
+                        <a asp-action="SubmitOrder" class="btn btn-primary">
+                            Submit Order
+                        </a>
+                    </p>
+                }
+                else
+                {
+                    <p>To place this order you must be logged in</p>
+                }
+
+
+            </div>
+
+
+
+
         }
 
 

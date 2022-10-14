@@ -62,14 +62,12 @@
                                    aria-expanded="false">Shop</a>
 
                                     <ul class="dropdown-menu">
-                                        <li><a asp-action="Index" asp-controller="EquipmentTypes">Shop Equipment</a></li>
+                                        @*<li><a asp-action="Index" asp-controller="EquipmentTypes">Shop Equipment</a></li>*@
                                         <li><a asp-action="Index" asp-controller="Equipments">Product Details</a></li>
-                                        <li><a asp-action="Checkout" asp-controller="Shop">Checkout</a></li>
+                                        @*<li><a asp-action="Checkout" asp-controller="Shop">Checkout</a></li>*@
                                         @*<li><a asp-action="ShoppingCart" asp-controller="Shop">Shopping Cart</a></li>
                                     <li><a asp-action="Confirmation" asp-controller="Shop">Confirmation</a></li>*@
-                                    </ul>
-
-                                
+                                    </ul>                                
                             </li>
 
                             @if (User.IsInRole("Admin"))
@@ -89,7 +87,7 @@
 
                             @if (signInManager.IsSignedIn(User))
                             {
-                                <li><a asp-action="Index" asp-controller="EquipmentTypes">Categories</a></li>
+                                <li><a asp-action="Index" asp-controller="EquipmentTypes" class="nav-link">Categories</a></li>
                             }
 
                             <li class="nav-item submenu dropdown">
