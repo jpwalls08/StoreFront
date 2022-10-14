@@ -158,5 +158,11 @@ namespace StoreFront.UI.MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        //This method MUST be async in order to invoke the UserManager's async methods in this action.
+        //public async Task<IActionResult> SubmitOrder()
+        //{
+
+        //}
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -67,6 +68,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: Equipments/Create
+
         public IActionResult Create()
         {
             ViewData["EquipmentTypeId"] = new SelectList(_context.EquipmentTypes, "EquipmentTypeId", "TypeName");
@@ -80,10 +82,50 @@ namespace StoreFront.UI.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EquipmentId,EquipmentName,EquipmentPrice,EquipmentDescription,StoreId,EquipmentTypeId,StatusId,ProductImage,UnitsInStock,UnitsOnOrder")] Equipment equipment)
+
+        public async Task<IActionResult> Create([Bind("EquipmentId,EquipmentName,EquipmentPrice,EquipmentDescription,StoreId,EquipmentTypeId,StatusId,ProductImage, UnitsInStock")] Equipment equipment)
         {
             if (ModelState.IsValid)
             {
+                if (equipment.Image != null)
+                {
+                    string ext = Path.GetExtension(equipment.Image.FileName);
+
+                    string[] validExts = { ".jpeg", ".jpg", ".gif", ".png" };
+
+                    if (validExts.Contains(ext.ToLower()) && equipment.Image.Length < 4_194_303)
+                    {
+                        equipment.ProductImage = Guid.NewGuid() + ext;
+
+                        string iAmRoot = _webHostEnvironment.WebRootPath;
+
+                        string fullImage = iAmRoot + "/images";
+
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await equipment.Image.CopyToAsync(memoryStream);
+
+                            using (var img = Image.FromStream(memoryStream))
+                            {
+                                int maxImageSize = 500; //size in pixels
+                                int maxThumbSize = 100; //size in pixels
+
+                                ImageUtility.ResizeImage(iAmRoot, equipment.ProductImage, img, maxImageSize, maxThumbSize);
+
+                                //myFile.Save("path/to/folder", "filename") > How to save something 
+                                //that is NOT an image.
+
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    equipment.ProductImage = "noimage.png";
+                }
+
+
                 _context.Add(equipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -118,7 +160,8 @@ namespace StoreFront.UI.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EquipmentId,EquipmentName,EquipmentPrice,EquipmentDescription,StoreId,EquipmentTypeId,StatusId,ProductImage,UnitsInStock,UnitsOnOrder")] Equipment equipment)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, [Bind("EquipmentId,EquipmentName,EquipmentPrice,EquipmentDescription,StoreId,EquipmentTypeId,StatusId,ProductImage, UnitsInStock")] Equipment equipment)
         {
             if (id != equipment.EquipmentId)
             {

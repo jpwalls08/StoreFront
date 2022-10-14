@@ -48,10 +48,8 @@ namespace StoreFront.DATA.EF.Models//.Metadata
         [Display(Name = "Image")]
         public string? ProductImage { get; set; }
 
-
         public int? UnitsInStock { get; set; }
 
-        public int? UnitsOnOrder { get; set; }
 
     }
 

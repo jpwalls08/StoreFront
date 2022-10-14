@@ -19,7 +19,6 @@ namespace StoreFront.DATA.EF.Models
         public int? StatusId { get; set; }
         public string? ProductImage { get; set; }
         public int? UnitsInStock { get; set; }
-        public int? UnitsOnOrder { get; set; }
 
         public virtual EquipmentType? EquipmentType { get; set; }
         public virtual EquipmentStatus? Status { get; set; }
