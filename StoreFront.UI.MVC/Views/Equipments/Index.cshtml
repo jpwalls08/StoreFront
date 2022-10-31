@@ -4,80 +4,127 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>*@
+<section class="product_section layout_padding">
+    <!-- single product slide -->
+    <div class="single-product-slider">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="text-center">
+                    <div class="section-title">
+                        <h1>Shop <span> Golf Equipment</span></h1>
+                        <p>
+                            Shop your favorite products and #1 best sellers while sales last.
+                        </p>
+                        <a asp-action="TiledView">Tile View</a>
+                    </div>
+                </div>
+            </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EquipmentName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EquipmentPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EquipmentDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitsInStock)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.UnitsOnOrder)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.EquipmentType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Store)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitsInStock)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.UnitsOnOrder)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentType.TypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status.StatusName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Store.PhoneNumber)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <p align="center">
+                @if (User.IsInRole("Admin"))
+                {
+                    <span>
+                        <a asp-action="Create">Add New Product</a> |
+                        <a asp-action="Discontinued">Discontinued Products</a> |
+                    </span>
+                }               
+            </p>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EquipmentName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EquipmentPrice)
+                    </th>
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.EquipmentDescription)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductImage)
+                    </th>
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.UnitsInStock)
+                    </th>*@
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.UnitsOnOrder)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.EquipmentType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Store)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EquipmentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EquipmentPrice)
+                        </td>
+                        @*<td>
+                    @Html.DisplayFor(modelItem => item.EquipmentDescription)
+                    </td>*@
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.ProductImage)*@
+                            <img src="~/img/storefrontphotos/equipment/@item.ProductImage" class="img-fluid" alt="@item.EquipmentDescription" />
+                        </td>
+                        @*<td>
+                    @Html.DisplayFor(modelItem => item.UnitsInStock)
+                    </td>*@
+                        @*<td>
+                    @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                    </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EquipmentType.TypeName)
+                        </td>
+                        @*<td>
+                    @Html.DisplayFor(modelItem => item.Status.StatusName)
+                    </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Store.PhoneNumber)
+                        </td>
+                        <td>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <span>
+                                    <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
+                                </span>
+                            }
+
+                            <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> 
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                @if (item.OrderEquipments.Count() == 0)
+                                {
+                                    <span>|</span>
+                                    <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
+                                }
+                                else
+                                {
+                                    <span>|</span>
+                                    <a disabled="disabled" class="text-danger text-decoration-line-through" title="Cannot delete product as it is referenced by an Order">Delete</a>
+                                }
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

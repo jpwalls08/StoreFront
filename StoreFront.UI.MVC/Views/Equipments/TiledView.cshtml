@@ -1,132 +1,131 @@
-﻿@model IEnumerable<StoreFront.DATA.EF.Models.Equipment>
+﻿@*@model IEnumerable<StoreFront.DATA.EF.Models.Equipment>*@
+
+@model IPagedList<StoreFront.DATA.EF.Models.Equipment>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
 
 @{
     ViewData["Title"] = "Tiled Equipment";
 }
 
-<h1>@ViewData["Title"]</h1>
+@*<h1>@ViewData["Title"]</h1>*@
 
-<section class="banner-area organic-breadcrumb">
-    <div class="container">
-        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div class="col-first">
-                <h1>
-                    Shop <span>Golf Equipment</span>
-                </h1>
+<section class="product_section layout_padding">
+    <!-- single product slide -->
+    <div class="single-product-slider">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="text-center">
+                    <div class="section-title">
+                        <h1>Shop <span> Golf Equipment</span></h1>
+                        <p>
+                            Shop your favorite products and #1 best sellers while sales last.
+                        </p>
+                        <a asp-action="Index">Table View</a>
+                    </div>
+                </div>
+            </div>
+            <p align="center">
 
-                <p>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <span>
-                            <a asp-action="Create">Create New</a> |
-                            <a asp-action="Discontinued">Discontinued Products</a>
-                        </span>
+                @if (User.IsInRole("Admin"))
+                {
+                    <span>
+                        <a asp-action="Create">Add New Product</a> |
+                        <a asp-action="Discontinued">Discontinued Products</a> 
+                    </span>
+                }
 
+            </p>
+        </div>
 
-                    }
+        <div class="row">
 
-                    <a asp-action="Index">Tile View</a>
+            <div class="offset-3 col-sm-6">
+                <form asp-action="TiledView" method="get">
+                    @*Passes back to server*@
 
-                </p>
+                    @*
+                    DDL - Step 2
+                    *@
+
+                    <label for="categoryId" class="control-label d-block text-center  my-md-8 mb-2">Filter by Products</label>
+                    <select name="categoryId" onchange="this.form.submit()" class="form-control text-center mb-3" asp-items="ViewBag.EquipmentTypeId">
+                        <option value="0">[Choose a Category]</option>
+                    </select>
+
+                    @*
+                    The 'name' attribute of this textbox MUST match the parameter name in the TiledProducts() action
+                    *@
+                    <input type="text" name="searchTerm" placeholder="Search Products" class="form-control text-center" value="@ViewBag.SearchTerm" />
+                    <input type="submit" value="Apply Filters" class="btn btn-primary mx-auto text-center w-30 d-sm-block mt-lg-3 mb-lg-5" />
+                </form>
+
+                @if (ViewBag.NbrResults != null)
+                {
+                    <p class="mt-5 p-2 alert-warning text-center">
+                        Showing @ViewBag.NbrResults result@(ViewBag.NbrResults > 1? "s" : "") for '@ViewBag.SearchTerm'...
+                    </p>
+                }
+
             </div>
 
-            <div class="row">
-
-                @foreach (var item in Model)
-                {
-                    <div class="col-sm-6 col-md-4 col-lg-4">
-                        <div class="box">
-                            <div class="option_container">
-                                <div class="options">
-                                    <a asp-action="Details" asp-route-id="@item.EquipmentId" class="option1">
-                                        @item.EquipmentName
-                                    </a>
-                                    <a href="javascript:void(0)" class="option2">
-                                        Add to cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="img-box">
-                                <img src="~/img/storefrontphotos/equipment/t_@item.ProductImage" alt="@item.EquipmentPrice" longdesc="@item.EquipmentDescription" />
-                            </div>
-                            <div class="detail-box">
-                                <h5>
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="box">
+                        <div class="option_container">
+                            <div class="options">
+                                <a asp-action="Details" asp-route-id="@item.EquipmentId" class="option1">
                                     @item.EquipmentName
-                                </h5>
-                                <h6>
-                                    @Html.DisplayFor(modelItem => item.EquipmentPrice)
-                                </h6>
+                                </a>
+                                @if (item.UnitsInStock > 0)
+                                {
+                                    <a asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-id="@item.EquipmentId" class="option2">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a disabled="true" class="option2">
+                                        Out of Stock
+                                    </a>
+                                }
+
                             </div>
                         </div>
+                        <div class="img-box">
+                            <img src="~/img/storefrontphotos/equipment/@item.ProductImage" alt="@item.EquipmentPrice" longdesc="@item.EquipmentDescription">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                @item.EquipmentName
+                            </h5>
+                            <h6>
+                                @Html.DisplayFor(modelItem => item.EquipmentPrice)
+                            </h6>
+                        </div>
                     </div>
+                </div>
 
-                }
+            }
+
+        </div>
+
+        <div class="row mt-5">
+            <div class="mx-auto text-center">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @*Total number of pages is less than that number*@
+                <div class="w-100">
+                    @Html.PagedListPager(Model, page => Url.Action("TiledView", new {page, searchTerm = ViewBag.SearchTerm, categoryId = ViewBag.EquipmentTypeId}))
+                </div>
             </div>
         </div>
+
+        <div class="btn-box">
+            <a asp-action="TiledView">
+                View All products
+            </a>
+        </div>
     </div>
+
 </section>
-
-
-
-
-@*   <table class="table">
-        <thead>
-            <tr>
-                <th>
-                                @Html.DisplayNameFor(model => model.EquipmentName)
-                </th>
-                <th>
-                                @Html.DisplayNameFor(model => model.EquipmentPrice)
-                </th>
-                <th>
-                                @Html.DisplayNameFor(model => model.EquipmentDescription)
-                </th>
-                <th>
-                                @Html.DisplayNameFor(model => model.ProductImage)
-                </th>
-                <th>
-                                @Html.DisplayNameFor(model => model.EquipmentType)
-                </th>
-                <th>
-                                @Html.DisplayNameFor(model => model.Status)
-                </th>
-                <th>
-                                @Html.DisplayNameFor(model => model.Store)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-                        @foreach (var item in Model)
-                        {
-                <tr>
-                    <td>
-                                    @Html.DisplayFor(modelItem => item.EquipmentName)
-                    </td>
-                    <td>
-                                    @Html.DisplayFor(modelItem => item.EquipmentPrice)
-                    </td>
-                    <td>
-                                    @Html.DisplayFor(modelItem => item.EquipmentDescription)
-                    </td>
-                    <td>
-                                    @Html.DisplayFor(modelItem => item.ProductImage)
-                    </td>
-                    <td>
-                                    @Html.DisplayFor(modelItem => item.EquipmentType.TypeName)
-                    </td>
-                    <td>
-                                    @Html.DisplayFor(modelItem => item.Status.StatusName)
-                    </td>
-                    <td>
-                                    @Html.DisplayFor(modelItem => item.Store.PhoneNumber)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.EquipmentId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.EquipmentId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.EquipmentId">Delete</a>
-                    </td>
-                </tr>
-                        }
-        </tbody>
-    </table>*@

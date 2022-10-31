@@ -206,7 +206,10 @@ h6 {
   font-size: 14px; }
 
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1.5em; }
+  line-height: 1.5em;
+  margin-top: 15px;
+  text-align: center
+}
 
 .typography h1, .typography h2, .typography h3, .typography h4, .typography h5, .typography h6 {
   color: #777777; }
