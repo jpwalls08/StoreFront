@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,15 +14,19 @@ namespace StoreFront.UI.MVC.Controllers
     {
         private readonly StoreFrontContext _context;
 
-        public OrdersController(StoreFrontContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public OrdersController(StoreFrontContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var storeFrontContext = _context.Orders.Include(o => o.User);
+            string? userId = (await _userManager.GetUserAsync(HttpContext.User))?.Id; //Retrieve current user's Id
+            var storeFrontContext = _context.Orders.Where(o => o.UserId == userId).Include(o => o.User);
             return View(await storeFrontContext.ToListAsync());
         }
 
@@ -39,6 +44,13 @@ namespace StoreFront.UI.MVC.Controllers
             if (order == null)
             {
                 return NotFound();
+            }
+
+            string? userId = (await _userManager.GetUserAsync(HttpContext.User))?.Id;
+
+            if (order.UserId != userId)
+            {
+                return RedirectToAction("Index", "Orders");
             }
 
             return View(order);
@@ -81,7 +93,7 @@ namespace StoreFront.UI.MVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.UserDetails, "UserId", "UserId", order.UserId);
+            ViewData["UserId"] = new SelectList(_context.UserDetails, "UserId", "FullName", order.UserId);
             return View(order);
         }
 
@@ -161,7 +173,9 @@ namespace StoreFront.UI.MVC.Controllers
 
         private bool OrderExists(int id)
         {
-          return _context.Orders.Any(e => e.OrderId == id);
+            //return _context.Orders.Any(e => e.OrderId == id);
+            return (_context.Orders?.Any(e => e.OrderId == id)).GetValueOrDefault();
+
         }
     }
 }

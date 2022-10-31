@@ -12,7 +12,7 @@
             </h2>
 
             <p align="center">
-                <a asp-action="Index" asp-controller="Equipment" class="btn btn-info">
+                <a asp-action="Index" asp-controller="Equipments" class="btn btn-info">
                     Back to Shopping
                 </a>
             </p>
@@ -41,17 +41,19 @@
                 </thead>
 
                 <tbody>
+                   
+
                     @foreach (var item in Model)
                     {
                         <tr>
                             <td>
-                                <img src="~/images/t_@item.Value.CartProd.ProductImage" alt="@item.Value.CartProd.EquipmentName" />
+                                <img src="~/img/storefrontphotos/equipment/t_@item.Value.CartProd.ProductImage" alt="@item.Value.CartProd.EquipmentName" />
                             </td>
                             <td>
                                 @*@item.Value.Qty*@
                                 <form asp-action="UpdateCart">
                                     <input type="hidden" name="equipmentId" value="@item.Value.CartProd.EquipmentId" />
-                                    @*<input type="number" min="1" max="@item.Value.CartProd.UnitsInStock" name="qty" value="@item.Value.Qty" class="form-control d-block mx-auto w-50 text-center" />*@
+                                    <input type="number" min="1" max="@item.Value.CartProd.UnitsInStock" name="qty" value="@item.Value.Qty" class="form-control d-block mx-auto w-50 text-center" />
                                     <input type="submit" value="Update Cart" class="btn btn-primary btn-sm" />
                                 </form>
                             </td>
@@ -104,7 +106,8 @@
                 }
                 else
                 {
-                    <p>To place this order you must be logged in</p>
+                    <p>To place this order you must be logged in. You can login <a asp-area="Identity" asp-page="/Account/Login">Here</a>
+                    <button disabled="disabled" class="btn btn-primary">Submit Order</button></p>
                 }
 
 

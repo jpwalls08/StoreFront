@@ -86,8 +86,6 @@ namespace StoreFront.UI.MVC.Controllers
             //if the session cart is null, instantiate the local shopping cart
             if (sessionCart == null)
             {
-
-
                 shoppingCart = new Dictionary<int, CartItemViewModel>();
             }
 
@@ -144,13 +142,13 @@ namespace StoreFront.UI.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult UpdateCart(int productId, int qty)
+        public IActionResult UpdateCart(int equipmentId, int qty)
         {
             var sessionCart = HttpContext.Session.GetString("cart");
 
             Dictionary<int, CartItemViewModel> shoppingCart = JsonConvert.DeserializeObject<Dictionary<int, CartItemViewModel>>(sessionCart);
 
-            shoppingCart[productId].Qty = qty;
+            shoppingCart[equipmentId].Qty = qty;
 
             string jsonCart = JsonConvert.SerializeObject(shoppingCart);
             HttpContext.Session.SetString("cart", jsonCart);
@@ -158,11 +156,83 @@ namespace StoreFront.UI.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        //This method MUST be async in order to invoke the UserManager's async methods in this action.
-        //public async Task<IActionResult> SubmitOrder()
-        //{
+        public async Task<IActionResult> SubmitOrder()
+        {
+            #region Planning out Order Submission
+            //Create Order object -> Then save to DB 
+            // - UserId (get from Identity)
+            // - OrderDate (Current date/time aka DateTime.Now)
+            // - ShipToName -- the person who is ordering (UserDetails)
+            // - ShipCity (UserDetails)
+            // - ShipZip (UserDetails)
+            // Add record to _context
+            // Save DB Changes
 
-        //}
+
+            // Create OrderProduct objects for each item in the cart -> Then save to DB
+            // - ProductId (Cart)
+            // - OrderId (Order object)
+            // - Quantity (Cart)
+            // - ProductPrice (Cart)
+            // Add the record to _context
+            // Save DB Changes
+
+            #endregion
+
+            //Retrieve current user's Id
+            //Async() allows you to do multiple things
+            //await controls 
+            string? userId = (await _userManager.GetUserAsync(HttpContext.User))?.Id;
+
+            //Retrieve the UserDetails record from the DB 
+            //Single record = .Find()
+            UserDetail ud = _context.UserDetails.Find(userId);
+
+            //Create the Order object
+            Order o = new Order()
+            {
+                UserId = userId,
+                OrderDate = DateTime.Now,
+                ShipToName = ud.FirstName, //FullName??
+                ShipCity = ud.City,
+                ShipState = ud.State,
+                ShipZip = ud.Zip
+            };
+
+            //Add the order to _context
+            _context.Orders.Add(o);
+
+
+            //Retrieve the session cart and convert to C#
+            var sessionCart = HttpContext.Session.GetString("cart");
+            //Convert json cart into C# cart
+            Dictionary<int, CartItemViewModel> shoppingCart = JsonConvert.DeserializeObject<Dictionary<int, CartItemViewModel>>(sessionCart);
+
+            //Create an OrderProduct record for every Product in our cart
+            foreach (var item in shoppingCart)
+            {
+                OrderEquipment op = new OrderEquipment()
+                {
+                    OrderId = o.OrderId,
+                    EquipmentId = item.Value.CartProd.EquipmentId,
+                    EquipmentPrice = item.Value.CartProd.EquipmentPrice,
+                    Quantity = (short?)item.Value.Qty
+                };
+
+                //ONLY need to add items to an existing entity (here -> the order 'o') if the items are related record (like the OrderProduct here)
+                o.OrderEquipments.Add(op); //realtionship to OrderProduct
+
+            }
+
+            //Save changes to DB 
+            _context.SaveChanges();
+
+            //Clear out cart contents
+            HttpContext.Session.Remove("cart");
+
+            return RedirectToAction("Index", "Orders");
+
+        }
 
     }
 }
