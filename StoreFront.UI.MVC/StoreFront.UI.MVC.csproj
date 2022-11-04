@@ -34,7 +34,6 @@
     <None Include="wwwroot\img\organic-food\.DS_Store" />
     <None Include="wwwroot\js\.DS_Store" />
     <None Include="wwwroot\js\countdown.js" />
-    <None Include="wwwroot\js\gmaps.min.js" />
     <None Include="wwwroot\js\ion.rangeSlider.js" />
     <None Include="wwwroot\js\jquery.ajaxchimp.min.js" />
     <None Include="wwwroot\js\jquery.magnific-popup.min.js" />
@@ -60,6 +59,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Core" Version="6.0.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+    <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
   </ItemGroup>
 
