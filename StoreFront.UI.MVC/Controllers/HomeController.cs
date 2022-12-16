@@ -34,14 +34,20 @@ namespace StoreFront.UI.MVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Contact(ContactViewModel cvm)
+        public IActionResult Contact()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(ContactViewModel cvm)
+        {
+            
 
             if (!ModelState.IsValid)
             {
                 return View(cvm);
-            }
+            }            
 
             //Create the format for the message content we will receive from the contact form
             string message = $"You have received a new email from your site's contact form!<br />" +
@@ -117,10 +123,19 @@ namespace StoreFront.UI.MVC.Controllers
                     return View(cvm);
 
                 }
-
+                
             }
 
-            return View("EmailConfirmation", cvm);
+            //else
+            //{
+            //    var contact = new Contact
+            //    {
+
+            //    }
+            //    ViewBag.Message = "Your message was sent.";
+            //}
+            
+            return View(cvm);
 
         }
         

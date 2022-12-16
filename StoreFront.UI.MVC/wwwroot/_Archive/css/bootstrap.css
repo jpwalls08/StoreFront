@@ -223,7 +223,8 @@ figure {
 
 img {
     vertical-align: middle;
-    border-style: none
+    border-style: none;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)
 }
 
 svg {
@@ -520,7 +521,7 @@ mark {
     background-color: #fff;
     border: 1px solid #dee2e6;
     border-radius: .25rem;
-    max-width: 100%;
+    max-width: 10%;
     height: auto
 }
 
@@ -6578,7 +6579,7 @@ button.bg-dark:hover {
 
 .d-flex {
     display: -ms-flexbox !important;
-    display: flex !important
+    /*display: flex !important*/
 }
 
 .d-inline-flex {
@@ -6856,7 +6857,8 @@ button.bg-dark:hover {
 
 .justify-content-end {
     -ms-flex-pack: end !important;
-    justify-content: flex-end !important
+    justify-content: flex-end !important;
+    padding: 15px 0px 50px 0px
 }
 
 .justify-content-center {

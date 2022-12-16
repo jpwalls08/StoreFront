@@ -9,7 +9,6 @@ namespace StoreFront.UI.MVC.Models
         [Required(ErrorMessage = "*")]
         public string Name { get; set; }
 
-
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "*")]
         public string Email { get; set; }

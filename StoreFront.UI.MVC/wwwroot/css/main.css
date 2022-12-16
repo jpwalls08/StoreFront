@@ -134,7 +134,7 @@ body {
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  color: #777777;
+  color: black;
   background: #fff; }
 
 html,
@@ -1127,6 +1127,7 @@ h1, h2, h3, h4, h5, h6 {
             .header_area .navbar .nav .nav-item.submenu ul .nav-item .nav-link {
               line-height: 45px;
               padding: 0px 30px;
+              width: 100%;
               -webkit-transition: all 0.3s ease 0s;
               -moz-transition: all 0.3s ease 0s;
               -o-transition: all 0.3s ease 0s;
@@ -1318,7 +1319,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 100px; }
 
 .breadcrumb-banner {
-  padding: 90px 0 100px 0; }
+  padding: 0px 0 100px 0; }
   .breadcrumb-banner h1 {
     font-weight: 600;
     color: #fff; }
@@ -1336,7 +1337,7 @@ h1, h2, h3, h4, h5, h6 {
       display: inline-block;
       margin: 0 10px; }
   .breadcrumb-banner .col-first {
-    padding-right: 15px; }
+    padding-right: 250px; }
     @media (max-width: 1680px) {
       .breadcrumb-banner .col-first {
         padding-right: 40px; } }
@@ -5680,8 +5681,10 @@ label {
 /* End Contact Success and error Area css
 ============================================================================================ */
 .footer-area {
-  padding-top: 100px;
-  background-color: #222222; }
+  padding-top: 15px;
+  background-color: orange;
+  margin-top: 12%
+}
   .footer-area h6 {
     color: #fff;
     margin-bottom: 25px;
@@ -5723,7 +5726,9 @@ label {
     margin-bottom: 40px; } }
 .single-footer-widget .form-inline {
   display: inline-block;
-  width: 100%; }
+  width: 100%;
+  margin-left: 60px
+}
 .single-footer-widget input {
   border: none;
   width: 80% !important;
